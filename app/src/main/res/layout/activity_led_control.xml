@@ -8,10 +8,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,6 +30,13 @@
                 tools:layout_editor_absoluteY="30dp" />
         </LinearLayout>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inputData"
+            android:inputType="text"
+            android:hint="Enter Data to Send"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,83 +50,46 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/holo_blue_light"
-                android:text="Combo 1"
+                android:text="Send Data"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="88dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button3"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/holo_blue_light"
-                android:text="Combo 2"
-                tools:layout_editor_absoluteX="192dp"
-                tools:layout_editor_absoluteY="64dp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Min Value"
+                android:id="@+id/minValue"
+                android:inputType="number"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Max Value"
+                android:id="@+id/maxValue"
+                android:inputType="number"/>
 
             <Button
-                android:id="@+id/button5"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/holo_blue_light"
-                android:text="Combo 3"
-                tools:layout_editor_absoluteX="61dp"
-                tools:layout_editor_absoluteY="134dp" />
-        </LinearLayout>
+                android:text="Set"
+                android:layout_gravity="right"
+                android:id="@+id/setButton"/>
 
-        <LinearLayout
+        </LinearLayout>
+        <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button6"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/holo_blue_light"
-                android:text="Combo 4"
-                tools:layout_editor_absoluteX="91dp"
-                tools:layout_editor_absoluteY="168dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button7"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@android:color/holo_blue_light"
-                android:text="Combo 5"
-                tools:layout_editor_absoluteX="112dp"
-                tools:layout_editor_absoluteY="336dp" />
-        </LinearLayout>
-
+            android:padding="10dp"
+            android:id="@+id/seekbarValue"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,10 @@ public class ledControl extends AppCompatActivity {
     BluetoothSocket btSocket = null;
     private boolean isBtConnected = false;
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private SeekBar seekBar;
+    private EditText minValue, maxValue;
 
+    int sentNumber = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,55 +43,58 @@ public class ledControl extends AppCompatActivity {
 
         setContentView(R.layout.activity_led_control);
 
+        seekBar = (SeekBar) findViewById(R.id.seekbarValue);
+        minValue = (EditText) findViewById(R.id.minValue);
+        maxValue = (EditText) findViewById(R.id.maxValue);
+
+
         btn1 = (Button) findViewById(R.id.button2);
-        btn2 = (Button) findViewById(R.id.button3);
-        btn3 = (Button) findViewById(R.id.button5);
-        btn4 = (Button) findViewById(R.id.button6);
-        btn5 = (Button) findViewById(R.id.button7);
+
         btnDis = (Button) findViewById(R.id.button4);
         lumn = (TextView) findViewById(R.id.textView2);
+
 
         new ConnectBT().execute();
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                sendSignal("1");
+                sendSignal(((EditText)findViewById(R.id.inputData)).getText().toString().trim());
+                Toast.makeText(ledControl.this, "You Have Sent "+((EditText)findViewById(R.id.inputData)).getText().toString().trim(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                sendSignal("2");
-            }
-        });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                sendSignal("3");
-            }
-        });
-
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                sendSignal("4");
-            }
-        });
-
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                sendSignal("5");
-            }
-        });
 
         btnDis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
                 Disconnect();
+            }
+        });
+
+        findViewById(R.id.setButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                seekBar.setMax(Integer.parseInt( maxValue.getText().toString() ));
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                sentNumber = i;
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                sendSignal(sentNumber+"");
+                Toast.makeText(ledControl.this, "You Have Sent "+sentNumber, Toast.LENGTH_SHORT).show();
             }
         });
     }
